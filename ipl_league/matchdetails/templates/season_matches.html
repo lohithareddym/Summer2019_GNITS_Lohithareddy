@@ -1,0 +1,35 @@
+<div class="dropdown">
+    <span class="button">SEASONS</span>
+    <div class="dropdown-content">
+        {% for season in seasons %}
+            <a href="{% url 'seasons' year %}">{{year}}</a>
+            <br>
+        {% endfor %}
+    </div>
+<br>
+<br>
+<table border=1px class="table is-striped is-fullwidth is-bordered">
+    <tr>
+        <td>SEASON</td>
+        <td>TEAM1</td>
+        <td>TEAM2</td>
+        <td>VENUE</td>
+        <td>TOSS RESULT</td>
+        <td>TOSS DECISION</td>
+        <td>WON</td>
+        <td>PLAYER OF MATCH</td>
+    </tr>
+    {% for match in matches %}
+    <tr>
+        <td>{{match.season}}</td>
+        <td>{{match.team1}}</td>
+        <td>{{match.team2}}</td>
+        <td>{{match.venue}}</td>
+        <td>{{match.toss_result}}</td>
+        <td>{{match.toss_decision}}</td>
+        <td>{{match.winner}}</td>
+        <td>{{match.player_of_match}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>matches</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css' %}">
+        <style>
+  a{
+  text-decoration:None;
+  }
+        .add_college
+{
+        width:123px;
+        height:30px;
+	    color:#ffffff;
+        background-color:#BAEFF2ff;
+        border-radius:15px;
+        float:left;
+}
+.logout
+{
+        width:123px;
+        height:30px;
+	    color:#ffffff;
+        background-color:#BAEFF2;
+        border-radius:15px;
+        float:right;
+}
+    </style>
+
+</head>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu" id="navMenuColorprimary-example">
+        <div class="navbar-start">
+            <div class="navbar-item">
+                IPL Season {{season}}
+            </div>
+        </div>
+        <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">
+                                  seasons
+                                </a>
+
+                                <div class="navbar-dropdown">
+                                    {% for season in seasons %}
+                                    <strong><a class="navbar-item" href="{% url 'season' season%}">
+                                      {{season}}
+                                    </a></strong>
+                                    {% endfor %}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+     </div>
+    </nav>
+    <span>
+
+    </span>
+    <div style="padding:15px" class ="container is-fluid">
+    {%for match in matches %}
+
+    <div class="box">
+            <strong>{{match.team1}} vs {{match.team2}}</strong><br>
+            <strong>Venue:</strong> {{match.venue}}<br>
+            <strong> Toss result :</strong> won by {{match.toss_win}}<br>
+            <strong> Toss Desision :</strong> opted to {{match.toss_decision}}<br>
+            <strong>Player of the match :</strong>{{match.player_of_match}}<br>
+            <strong>Winner</strong>{{match.winner}}<br>
+            <br>
+            <div class="buttons">
+                    <a href="{% url 'matchdetails' match.id %}" class="button is-black">match details</a><br>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+         <div class="pagination">
+    <ul class="step-links">
+        {% if matches.has_previous %}
+            <a href="?page=1"><button>first</button></a>
+            <a href="?page={{ result_set.previous_page_number }}"><button>previous</button></a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ matches.number }} of {{ matches.paginator.num_pages }}.
+        </span>
+
+        {% if matches.has_next %}
+            <a href="?page={{ matches.next_page_number }}"><button>next</button></a>
+            <a href="?page={{ matches.paginator.num_pages }}"><button>Last</button></a>
+        {% endif %}
+    </ul>
+</div>
+</body>
+</html>
