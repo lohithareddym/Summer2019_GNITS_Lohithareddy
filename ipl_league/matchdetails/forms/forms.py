@@ -1,6 +1,4 @@
 from django import forms
-
-
 class LoginForm(forms.Form):
     username = forms.CharField(
         required=True,
@@ -29,3 +27,11 @@ class SignUpForm(forms.Form):
                  attrs={'class': 'input', 'type': 'password', 'placeholders': 'Enter password'}),
      )
 
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={'class': 'input', 'type': 'password', 'placeholders': 'Enter password'}),
+        ) 
